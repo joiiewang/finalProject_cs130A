@@ -15,6 +15,32 @@ Node* findPerson(string name, Node* r){
 
 }
 
+string friendshipGraph::pointQuery(string name){
+    Node* n = findPerson(name, root);
+    std::ifstream is ("profileData.txt",std::ifstream::in);
+    string answer;
+    if(is) is.seekg(n->index);
+    getline(is,answer);
+    return answer;
+}
+
+string friendshipGraph::friendQuery(string name){
+    Node* n = findPerson(name, root);
+    std::ifstream is ("profileData.txt", std::ifstream::in);
+    vector<string> f = n->friends;
+    string answer;
+    for(int i=0;i<f.size();i++){
+        Node* fren = findPerson(f[i],root);
+        if(is){
+            is.seekg(fren->index);
+        }
+        string temp;
+        getline(is, temp);
+        answer+= temp + "\n";
+    }
+    return answer;
+}
+
 
 string friendshipGraph::occupationFriendQuery(string name){
     Node* n = findPerson(name, root);
@@ -59,10 +85,32 @@ string friendshipGraph::nameFriendQuery(string name){
     return answer;
 }
 
-//helper function for occupation range query
+//helper function for range query
 void range(string& answer, Node* r, string firstName, string secondName){
     if(!r) return;
     range(answer, r->left, firstName, secondName);
+    if(r->name.compare(firstName)>=0&&r->name.compare(secondName)<=0){
+        std::ifstream is ("profileData.txt", std::ifstream::in);
+        if(is){
+            is.seekg(r->index);
+        }
+        string temp;
+        getline(is, temp);
+        answer+= temp+"\n";
+    }
+    range(answer, r->right, firstName, secondName);
+}
+
+string friendshipGraph::rangeQuery(string firstName, string secondName){
+    string answer;
+    range(answer, root, firstName, secondName);
+    return answer;
+}
+
+//helper function for occupation range query
+void occupationRange(string& answer, Node* r, string firstName, string secondName){
+    if(!r) return;
+    occupationRange(answer, r->left, firstName, secondName);
     if(r->name.compare(firstName)>=0&&r->name.compare(secondName)<=0){
         std::ifstream is ("profileData.txt", std::ifstream::in);
         if(is){
@@ -72,12 +120,12 @@ void range(string& answer, Node* r, string firstName, string secondName){
         getline(is, occupation);
         answer+= r->name + ": "+ occupation+"\n";
     }
-    range(answer, r->right, firstName, secondName);
+    occupationRange(answer, r->right, firstName, secondName);
 }
 
 string friendshipGraph::occupationRangeQuery(string firstName, string secondName){
     string answer;
-    range(answer, root, firstName, secondName);
+    occupationRange(answer, root, firstName, secondName);
     return answer;
 
 }

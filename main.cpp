@@ -47,10 +47,10 @@ int main(){
             friendships.addFriend(name1, name2);
         }
         else if(option==3){
-            cout<<"Insert 1 for information between two names, Insert 2 for information of all friends of a user:"<<endl;
+            cout<<"Insert 1 for information between two names, Insert 2 for information of all friends of a user, Insert 3 for information of one user:"<<endl;
             cin>>option;
             cin_clear();
-            cout<<"Insert 1 for names, 2 for ages, 3 for occupations: "<<endl;
+            if(option!=3) cout<<"Insert 1 for names, 2 for ages, 3 for occupations, 4 for all: "<<endl;
             if(option==1){
                 cin>>option;
                 cin_clear();
@@ -66,11 +66,14 @@ int main(){
                 else if(option==2){
                     cout<<friendships.ageRangeQuery(name1, name2)<<endl;
                 }
-                else{
+                else if(option==3){
                     cout<<friendships.occupationRangeQuery(name1, name2)<<endl;
                 } 
+                else{
+                    cout<<friendships.rangeQuery(name1, name2)<<endl;
+                }
             }
-            else{
+            else if(option==2){
                 cin>>option;
                 cin_clear();
                 string user;
@@ -82,9 +85,18 @@ int main(){
                 else if(option==2){
                     cout<<friendships.ageFriendQuery(user)<<endl;
                 }
-                else{
+                else if(option==3){
                     cout<<friendships.occupationFriendQuery(user)<<endl;
                 }
+                else{
+                    cout<<friendships.friendQuery(user)<<endl;
+                }
+            }
+            else{
+                string user;
+                cout<<"Insert user name:"<<endl;
+                getline(cin, user, '\n');
+                cout<<friendships.pointQuery(user)<<endl;
             }
         }
         else if(option==4){

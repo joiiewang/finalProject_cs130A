@@ -24,9 +24,12 @@ class friendshipGraph{
         friendshipGraph(){
             currIndex=0;
         }
+        std::string pointQuery(std::string name);
+        std::string friendQuery(std::string name);
         std::string nameFriendQuery(std::string name);
         std::string ageFriendQuery(std::string name);
         std::string occupationFriendQuery(std::string name);
+        std::string rangeQuery(std::string firstName, std::string secondName);
         std::string nameRangeQuery(std::string firstName, std::string secondName);
         std::string ageRangeQuery(std::string firstName, std::string secondName);
         std::string occupationRangeQuery(std::string firstName, std::string secondName);
