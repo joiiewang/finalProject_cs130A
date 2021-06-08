@@ -20,7 +20,8 @@ int main(){
         cout<<"Press one to insert new person."<<endl;
         cout<<"Press two to insert new friendship"<<endl;
         cout<<"Press three to query information"<<endl;
-        cout<<"Press four to exit"<<endl;
+        cout<<"Press four to print all information"<<endl;
+        cout<<"Press five to exit"<<endl;
         cin>>option;
         cin_clear();
         if(option==1){
@@ -85,6 +86,9 @@ int main(){
                     cout<<friendships.occupationFriendQuery(user)<<endl;
                 }
             }
+        }
+        else if(option==4){
+            friendships.printAll();
         }
         else break;
     }

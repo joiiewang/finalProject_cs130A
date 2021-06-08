@@ -133,8 +133,6 @@ void printAllHelper(Node* root){
     }
     string info;
     getline(is, info);
-    getline(is, info);
-    getline(is, info);
     cout<<info<<", friends: ";
     for(int i=0;i<root->friends.size();i++){
         cout<<root->friends[i]<<",";
@@ -192,6 +190,10 @@ void friendshipGraph::rbInsert(Node* n){
     while(currNode != NULL){
         prevNode = currNode;
         if(n->name.compare(currNode->name)<0) currNode = currNode->left;
+        else if(n->name.compare(currNode->name) == 0){
+            cout << "Error: non unique name" << endl;
+            return;
+        }
         else currNode = currNode->right;
     }
     n->parent=prevNode;
@@ -278,7 +280,8 @@ void friendshipGraph::insert(string name, int age, string occupation){
 void friendshipGraph::addFriend(string name1, string name2){
     Node* n1 = findPerson(name1, root);
     Node* n2 = findPerson(name2,root);
-    if(n1&&n2){
+    if(!n1||!n2) cout<<"One of the names entered is not in the data base!"<<endl;
+    else{
         n1->friends.push_back(name2);
         n2->friends.push_back(name1);
     }
@@ -287,6 +290,8 @@ void friendshipGraph::addFriend(string name1, string name2){
 void friendshipGraph::initialize(string fileName){
     std::ifstream is (fileName, std::ifstream::in);
     string name;
+    string s;
+    getline(is,s);
     while(getline(is,name, ',')){
         string ageS;
         getline(is,ageS, ',');
@@ -330,6 +335,5 @@ void friendshipGraph::initialize(string fileName){
             output<<occupation<<endl;
         }
         rbInsert(n);
-        printTree();
     }
 }
