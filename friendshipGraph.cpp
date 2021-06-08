@@ -103,6 +103,11 @@ void range(string& answer, Node* r, string firstName, string secondName){
 
 string friendshipGraph::rangeQuery(string firstName, string secondName){
     string answer;
+    if(firstName.compare(secondName)>0){
+        string temp = firstName;
+        firstName = secondName;
+        secondName=temp;
+    }
     range(answer, root, firstName, secondName);
     return answer;
 }
@@ -125,6 +130,11 @@ void occupationRange(string& answer, Node* r, string firstName, string secondNam
 
 string friendshipGraph::occupationRangeQuery(string firstName, string secondName){
     string answer;
+    if(firstName.compare(secondName)>0){
+        string temp = firstName;
+        firstName = secondName;
+        secondName=temp;
+    }
     occupationRange(answer, root, firstName, secondName);
     return answer;
 
@@ -148,6 +158,11 @@ void ageRange(string& answer, Node* r, string firstName, string secondName){
 
 string friendshipGraph::ageRangeQuery(string firstName, string secondName){
     string answer;
+    if(firstName.compare(secondName)>0){
+        string temp = firstName;
+        firstName = secondName;
+        secondName=temp;
+    }
     ageRange(answer, root, firstName, secondName);
     return answer;
 
@@ -165,6 +180,11 @@ void nameRange(string& answer, Node* r, string firstName, string secondName){
 
 string friendshipGraph::nameRangeQuery(string firstName, string secondName){
     string answer;
+    if(firstName.compare(secondName)>0){
+        string temp = firstName;
+        firstName = secondName;
+        secondName=temp;
+    }
     nameRange(answer, root, firstName, secondName);
     return answer;
 
